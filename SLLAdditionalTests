@@ -1,0 +1,67 @@
+package tests;
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import sait.sll.utility.SLL;
+import sait.sll.problemdomain.User;
+
+public class SLLAdditionalTests {
+
+    @Test
+    public void testInsertAtZeroOnEmptyList() {
+        SLL list = new SLL();
+        User u = new User(1, "A", "a@example.com", "pass");
+
+        list.insert(u, 0);
+
+        assertEquals(1, list.size());
+        assertEquals(u, list.retrieve(0));
+    }
+
+    @Test
+    public void testDeleteOnlyElement() {
+        SLL list = new SLL();
+        User u = new User(1, "A", "a@example.com", "pass");
+
+        list.append(u);
+        list.delete(0);
+
+        assertTrue(list.isEmpty());
+        assertEquals(0, list.size());
+    }
+
+    @Test
+    public void testIndexOfNotFound() {
+        SLL list = new SLL();
+        User u1 = new User(1, "A", "a@example.com", "pass");
+        User u2 = new User(2, "B", "b@example.com", "pass");
+
+        list.append(u1);
+
+        assertEquals(-1, list.indexOf(u2));
+    }
+
+    @Test
+    public void testClear() {
+        SLL list = new SLL();
+        list.append(new User(1, "A", "a@example.com", "pass"));
+        list.append(new User(2, "B", "b@example.com", "pass"));
+
+        list.clear();
+
+        assertTrue(list.isEmpty());
+        assertEquals(0, list.size());
+    }
+
+    @Test
+    public void testContains() {
+        SLL list = new SLL();
+        User u = new User(1, "A", "a@example.com", "pass");
+
+        assertFalse(list.contains(u));
+
+        list.append(u);
+
+        assertTrue(list.contains(u));
+    }
+}
